@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Cursor",
+    "description": "Adds Cursor models as a DeepSeek Harness provider: browser sign-in with a DSH-stored key, a Settings page for model selection, Cursor subscription quota windows, and a composer usage pill. Cursor runs the model; DSH keeps tool approval, execution, and session history.",
+    "detail": "docs/DETAIL.md"
+  }
+}

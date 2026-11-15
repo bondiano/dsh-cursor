@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img" aria-label="Cursor provider">
+  <rect x="1" y="1" width="30" height="30" rx="9" fill="#111827"/>
+  <path d="M8 7.5 24 16l-6.4 1.7L15 25 8 7.5Z" fill="none" stroke="#f9fafb" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M15 17.7 24 16" fill="none" stroke="#f9fafb" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="23.5" cy="8.5" r="2.5" fill="#34d399"/>
+</svg>

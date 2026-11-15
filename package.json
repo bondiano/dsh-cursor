@@ -1,0 +1,57 @@
+{
+  "name": "@local/dsh-cursor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Cursor models in DeepSeek Harness: browser sign-in, DSH-owned tools, model editor, subscription quota windows and a composer usage pill.",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "client.js",
+    "cordis.patch.yml",
+    "locale",
+    "docs",
+    "README.md",
+    "NOTICE",
+    "icon.svg",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "dependencies": {
+    "@cursor/sdk": "1.3.1",
+    "ajv": "^8.20.0",
+    "zod": "^3.25.76"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-home-paths": ">=0.2.2-rc.3",
+    "@deepseek-ai/dsh-llm": ">=0.2.2-rc.3",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.3",
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check index.js && node --check client.js && node --check lib/*.js && node --test test/*.test.js",
+    "pack:check": "pnpm pack --dry-run"
+  }
+}

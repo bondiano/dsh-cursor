@@ -1,0 +1,29 @@
+# Notice and attribution
+
+`@local/dsh-cursor` is MIT-licensed (see LICENSE).
+
+## Cursor SDK
+
+The provider depends on the npm package `@cursor/sdk` (version 1.3.1), which is
+distributed under the Cursor SDK License and is subject to Cursor's Terms of
+Service. This package does not redistribute or vendor the SDK; installers fetch
+it from npm. Model calls through the SDK consume the user's Cursor account
+according to Cursor's terms.
+
+## Prior art and reused ideas
+
+- `dsh-cursor-provider` by Kaczev (MIT): the adapter/registration structure,
+  host-owned custom-tool bridge, session-prefix reuse, bounded timeout behavior,
+  catalog parameter normalization, and image projection informed this
+  implementation. No plugin-detail UI or API-key-only flow is copied.
+- `Sdju/projector` `plugins/cursor`: local Cursor CLI authentication and the
+  `GetCurrentPeriodUsage` ConnectRPC request/response fields, plus the
+  Total/Auto/API quota-window labels. The ACP transport and the EU-network
+  probe are deliberately not used.
+- `omp-cursor`: the uncertainty/cancellation posture — an interrupted run is
+  disposed rather than resumed, a continuation is single-use, cleanup is
+  bounded, and an unknown terminal state never triggers an automatic paid
+  retry.
+
+Product names and trademarks belong to their owners. The plugin icon is an
+original geometric drawing, not the Cursor logo.

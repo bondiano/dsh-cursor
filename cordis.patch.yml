@@ -1,0 +1,11 @@
+# Cursor provider bundle: one Host row that registers the `cursor` LLM route,
+# its authenticated Settings RPC, and the Cursor SDK transport. The client half
+# (Settings → Cursor and the composer usage pill) is discovered from the
+# `dsh.client` declaration in package.json.
+- insert:
+    - id: cursor-provider
+      name: '@local/dsh-cursor'
+      config:
+        maxIdleAgents: 8
+        agentIdleTimeoutMs: 1800000
+        requestTimeoutMs: 1800000
