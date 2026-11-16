@@ -53,5 +53,13 @@
     "test": "node --test test/*.test.js",
     "check": "node --check index.js && node --check client.js && node --check lib/*.js && node --test test/*.test.js",
     "pack:check": "pnpm pack --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bondiano/dsh-cursor.git"
+  },
+  "homepage": "https://github.com/bondiano/dsh-cursor#readme",
+  "bugs": {
+    "url": "https://github.com/bondiano/dsh-cursor/issues"
   }
 }

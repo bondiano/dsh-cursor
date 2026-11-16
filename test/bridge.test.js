@@ -100,6 +100,50 @@ test('bridge appends sourced runtime context to the first result', async () => {
   assert.match(result.content[1].text, /runtime-context/)
 })
 
+test('bridge folds agent-instructions messages into the first result', async () => {
+  const events = []
+  const bridge = new NativeBridge({ tools: [TOOL], notify: event => events.push(event) })
+  const pending = bridge.customTools.read.execute({ path: 'a' })
+  const id = events[0].id
+  bridge.resume(
+    [
+      callMessage(id),
+      resultMessage(id),
+      {
+        role: 'user',
+        source: { kind: 'agent-instructions', form: 'instructions', changes: [] },
+        content: [{ type: 'text', text: 'Additional instructions from: whale-girl-ru/AGENTS.md' }],
+      },
+    ],
+    [id],
+  )
+  const result = await pending
+  assert.equal(result.content.length, 2)
+  assert.match(result.content[1].text, /instruction updates/)
+  assert.match(result.content[1].text, /whale-girl-ru/)
+})
+
+test('bridge still rejects a genuine user turn between a call and its results', async () => {
+  const events = []
+  const bridge = new NativeBridge({ tools: [TOOL], notify: event => events.push(event) })
+  const pending = bridge.customTools.read.execute({ path: 'a' })
+  const id = events[0].id
+  assert.throws(
+    () =>
+      bridge.resume(
+        [
+          callMessage(id),
+          resultMessage(id),
+          { role: 'user', source: { kind: 'user' }, content: [{ type: 'text', text: 'stop' }] },
+        ],
+        [id],
+      ),
+    /matching tool results/,
+  )
+  bridge.close()
+  await assert.rejects(pending)
+})
+
 test('bridge close rejects every pending callback', async () => {
   const events = []
   const bridge = new NativeBridge({ tools: [TOOL], notify: event => events.push(event) })
