@@ -47,8 +47,12 @@ window.__ModuleLoader__.load({
       manualPlaceholder: 'Cursor API key',
       saveKey: 'Save key',
       keySaved: 'API key saved.',
-      usageTitle: 'Subscription usage',
-      usageIntro: 'Read from your local Cursor CLI session. Total, Auto, and API windows follow your Cursor plan.',
+      usageTitle: 'Plan & usage',
+      currentPlan: 'Current plan',
+      planReset: 'Usage limits reset on {date} ({days} days left)',
+      planResetToday: 'Usage limits reset today',
+      includedIn: 'Included in {plan}',
+      includedUsage: 'Included usage',
       usageNoCli: 'Cursor CLI is not signed in on this machine. Run `agent login` in a terminal, then refresh.',
       usageExpired: 'The Cursor CLI session expired. Run `agent login` again.',
       usageRejected: 'Cursor rejected the local CLI session. Run `agent login` again.',
@@ -57,14 +61,16 @@ window.__ModuleLoader__.load({
       usageKeychainHint: 'macOS may ask for Keychain access. The token stays in the Host process.',
       refresh: 'Refresh',
       refreshing: 'Refreshing…',
-      quotaTotal: 'Total',
-      quotaAuto: 'Auto',
-      quotaApi: 'API',
-      resetsIn: 'resets in {duration}',
-      resetsAt: 'resets {date}',
+      quotaAuto: 'Cursor Models',
+      quotaAutoHint: 'Includes Cursor Grok and Composer',
+      quotaAutoNote: 'Additional usage beyond limits consumes Other Models quota or on-demand spend.',
+      quotaApi: 'Other Models',
+      quotaApiNote: 'Additional usage beyond limits consumes on-demand spend.',
+      onDemandTitle: 'On-Demand',
+      onDemandAmount: '{used} / {limit}',
+      onDemandNote: "Requests stop at this limit. Overage from requests already running isn't billed unless the limit is raised this billing cycle.",
       usedPercent: '{percent}% used',
       stale: 'Showing the last successful reading.',
-      plan: 'Plan: {plan}',
       modelsTitle: 'Models',
       modelsIntro: 'Choose which Cursor models appear in the composer. Context selects the smallest declared tier that covers the budget; leave it empty for the model default.',
       refreshCatalog: 'Refresh catalog',
@@ -122,24 +128,30 @@ window.__ModuleLoader__.load({
       manualPlaceholder: 'Cursor API key',
       saveKey: 'Сохранить ключ',
       keySaved: 'API-ключ сохранён.',
-      usageTitle: 'Расход подписки',
-      usageIntro: 'Читается из локальной сессии Cursor CLI. Окна Total, Auto и API соответствуют вашему плану Cursor.',
+      usageTitle: 'План и расход',
+      currentPlan: 'Текущий план',
+      planReset: 'Лимиты обнулятся {date} (осталось {days} дн.)',
+      planResetToday: 'Лимиты обнулятся сегодня',
+      includedIn: 'Входит в {plan}',
+      includedUsage: 'Включённый расход',
       usageNoCli: 'Cursor CLI не авторизован на этой машине. Выполните `agent login` в терминале и обновите.',
       usageExpired: 'Сессия Cursor CLI истекла. Выполните `agent login` снова.',
       usageRejected: 'Cursor отклонил локальную сессию CLI. Выполните `agent login` снова.',
-      usageNoWindows: 'Cursor не вернул окна расхода для этого аккаунта.',
+      usageNoWindows: 'Cursor не вернул данные о расходе для этого аккаунта.',
       usageKeychain: 'Прочитать из Keychain macOS',
       usageKeychainHint: 'macOS может запросить доступ к Keychain. Токен остаётся в Host-процессе.',
       refresh: 'Обновить',
       refreshing: 'Обновляем…',
-      quotaTotal: 'Всего',
-      quotaAuto: 'Авто',
-      quotaApi: 'API',
-      resetsIn: 'сброс через {duration}',
-      resetsAt: 'сброс {date}',
+      quotaAuto: 'Модели Cursor',
+      quotaAutoHint: 'Включает Cursor Grok и Composer',
+      quotaAutoNote: 'Расход сверх лимита идёт из квоты Other Models или из on-demand.',
+      quotaApi: 'Other Models',
+      quotaApiNote: 'Расход сверх лимита идёт из on-demand.',
+      onDemandTitle: 'On-Demand',
+      onDemandAmount: '{used} / {limit}',
+      onDemandNote: 'Запросы останавливаются на этом лимите. Превышение по уже запущенным запросам не тарифицируется, пока лимит не поднят в этом расчётном периоде.',
       usedPercent: 'использовано {percent}%',
-      stale: 'Показано последнее успешное измерение.',
-      plan: 'План: {plan}',
+      stale: 'Показаны последние успешные данные.',
       modelsTitle: 'Модели',
       modelsIntro: 'Выберите модели Cursor для композера. Контекст задаёт минимальный объявленный тир, покрывающий бюджет; пустое значение — значение модели по умолчанию.',
       refreshCatalog: 'Обновить каталог',
@@ -197,24 +209,30 @@ window.__ModuleLoader__.load({
       manualPlaceholder: 'Cursor API 密钥',
       saveKey: '保存密钥',
       keySaved: 'API 密钥已保存。',
-      usageTitle: '订阅用量',
-      usageIntro: '读取本机 Cursor CLI 会话。Total、Auto、API 窗口对应你的 Cursor 套餐。',
+      usageTitle: '套餐与用量',
+      currentPlan: '当前套餐',
+      planReset: '用量限制将于 {date} 重置（剩余 {days} 天）',
+      planResetToday: '用量限制今日重置',
+      includedIn: '{plan} 套餐包含',
+      includedUsage: '包含用量',
       usageNoCli: '本机 Cursor CLI 未登录。请在终端运行 `agent login` 后刷新。',
       usageExpired: 'Cursor CLI 会话已过期，请重新运行 `agent login`。',
       usageRejected: 'Cursor 拒绝了本地 CLI 会话，请重新运行 `agent login`。',
-      usageNoWindows: 'Cursor 未返回该账户的用量窗口。',
+      usageNoWindows: 'Cursor 未返回该账户的用量数据。',
       usageKeychain: '从 macOS Keychain 读取',
       usageKeychainHint: 'macOS 可能请求 Keychain 访问权限。令牌保留在 Host 进程。',
       refresh: '刷新',
       refreshing: '刷新中…',
-      quotaTotal: '总计',
-      quotaAuto: '自动',
-      quotaApi: 'API',
-      resetsIn: '{duration} 后重置',
-      resetsAt: '{date} 重置',
+      quotaAuto: 'Cursor Models',
+      quotaAutoHint: '包含 Cursor Grok 与 Composer',
+      quotaAutoNote: '超出限制的用量将消耗 Other Models 额度或按需付费。',
+      quotaApi: 'Other Models',
+      quotaApiNote: '超出限制的用量将按需付费。',
+      onDemandTitle: 'On-Demand',
+      onDemandAmount: '{used} / {limit}',
+      onDemandNote: '请求将在该限额处停止。已运行请求的超额部分在本次计费周期提高限额前不计费。',
       usedPercent: '已用 {percent}%',
       stale: '显示上次成功读取的数据。',
-      plan: '套餐：{plan}',
       modelsTitle: '模型',
       modelsIntro: '选择出现在输入框中的 Cursor 模型。上下文会选择覆盖预算的最小声明层级；留空使用模型默认值。',
       refreshCatalog: '刷新目录',
@@ -277,9 +295,15 @@ window.__ModuleLoader__.load({
       .dsh-cursor-error { border: 0.5px solid var(--dsw-alias-state-error-primary); color: var(--dsw-alias-state-error-primary); border-radius: 10px; padding: 10px 12px; font-size: 12px; line-height: 18px; }
       .dsh-cursor-notice { color: var(--dsw-alias-state-success-primary); font-size: 12px; line-height: 18px; }
       .dsh-cursor-link { color: var(--dsw-alias-label-link, var(--dsw-alias-state-success-primary)); text-decoration: underline; word-break: break-all; font-size: 12px; }
-      .dsh-cursor-usage-list { display: flex; flex-direction: column; gap: 10px; }
+      .dsh-cursor-usage-list { display: flex; flex-direction: column; gap: 12px; }
       .dsh-cursor-usage-row { display: flex; flex-direction: column; gap: 4px; }
       .dsh-cursor-usage-label { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; line-height: 18px; color: var(--dsw-alias-label-secondary); }
+      .dsh-cursor-usage-hint { color: var(--dsw-alias-label-secondary); }
+      .dsh-cursor-usage-note { font-size: 11px; line-height: 16px; color: var(--dsw-alias-label-secondary); }
+      .dsh-cursor-plan { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+      .dsh-cursor-plan-label { font-size: 11px; line-height: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dsw-alias-label-secondary); }
+      .dsh-cursor-plan-name { font-size: 15px; line-height: 22px; font-weight: 600; color: var(--dsw-alias-label-primary); }
+      .dsh-cursor-section-label { font-size: 11px; line-height: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dsw-alias-label-secondary); }
       .dsh-cursor-bar { height: 6px; border-radius: 3px; background: var(--dsw-alias-bg-layer-4); overflow: hidden; }
       .dsh-cursor-bar > span { display: block; height: 100%; border-radius: 3px; }
       .dsh-cursor-models { display: flex; flex-direction: column; gap: 8px; }
@@ -301,25 +325,25 @@ window.__ModuleLoader__.load({
       details.dsh-cursor-details summary { cursor: pointer; font-size: 12px; color: var(--dsw-alias-label-secondary); }
     `
 
-    const WEEKDAYS = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' })
+    const DATE_ONLY = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' })
+    const DAY_MS = 86_400_000
 
     function formatDate(ms) {
+      const date = new Date(Number(ms))
+      if (Number.isNaN(date.getTime())) return undefined
       try {
-        return WEEKDAYS.format(new Date(ms))
+        return DATE_ONLY.format(date)
       } catch {
-        return String(ms)
+        return date.toISOString().slice(0, 10)
       }
     }
 
-    function formatDuration(ms) {
-      const minutes = Math.max(1, Math.floor(Math.max(0, ms) / 60_000))
-      const days = Math.floor(minutes / 1440)
-      const hours = Math.floor((minutes % 1440) / 60)
-      const mins = minutes % 60
-      if (days > 0) return `${days}d ${hours}h`
-      if (hours > 0) return `${hours}h ${mins}m`
-      return `${mins}m`
+    function daysLeft(ms) {
+      return Math.max(0, Math.ceil((Number(ms) - Date.now()) / DAY_MS))
     }
+
+    /** Cursor shows whole dollars: `$0 / $2`. */
+    const money = value => `$${Math.round(value * 100) / 100}`
 
     function barColor(usedPercent) {
       if (!Number.isFinite(usedPercent)) return 'var(--dsw-alias-label-dimmed)'
@@ -345,10 +369,39 @@ window.__ModuleLoader__.load({
       return String(value)
     }
 
-    function windowLabel(t, key) {
-      if (key === 'auto') return t('quotaAuto')
-      if (key === 'api') return t('quotaApi')
-      return t('quotaTotal')
+    function QuotaBar({ label, usedPercent }) {
+      const percent = Math.round(usedPercent)
+      return h(
+        'div',
+        {
+          className: 'dsh-cursor-bar',
+          role: 'progressbar',
+          'aria-valuemin': 0,
+          'aria-valuemax': 100,
+          'aria-valuenow': percent,
+          'aria-label': label,
+        },
+        h('span', { style: { width: `${Math.max(0, Math.min(100, usedPercent))}%`, background: barColor(usedPercent) } }),
+      )
+    }
+
+    function QuotaRow({ t, label, hint, note, usedPercent }) {
+      return h(
+        'div',
+        { className: 'dsh-cursor-usage-row', role: 'listitem' },
+        h(
+          'div',
+          { className: 'dsh-cursor-usage-label' },
+          h('span', null, label, hint === undefined ? null : h('span', { className: 'dsh-cursor-usage-hint' }, ` · ${hint}`)),
+          h('span', null, t('usedPercent', { percent: Math.round(usedPercent) })),
+        ),
+        h(QuotaBar, { label, usedPercent }),
+        note === undefined ? null : h('div', { className: 'dsh-cursor-usage-note' }, note),
+      )
+    }
+
+    function windowByKey(usage, key) {
+      return Array.isArray(usage?.windows) ? usage.windows.find(window => window.key === key) : undefined
     }
 
     function UsageBars({ usage, t, compact = false }) {
@@ -367,40 +420,46 @@ window.__ModuleLoader__.load({
                   : t('pillUnavailable')
         return h('div', { className: 'dsh-cursor-muted', role: 'status' }, message)
       }
+      const auto = windowByKey(usage, 'auto')
+      const api = windowByKey(usage, 'api')
+      const onDemand = usage.onDemand
+      const onDemandPercent = onDemand === undefined || onDemand.limit <= 0 ? 0 : (onDemand.used / onDemand.limit) * 100
       return h(
         'div',
         { className: 'dsh-cursor-usage-list', role: 'list' },
-        usage.windows.map(window =>
-          h(
-            'div',
-            { className: 'dsh-cursor-usage-row', role: 'listitem', key: window.key },
-            h(
+        auto === undefined
+          ? null
+          : h(QuotaRow, {
+              key: 'auto',
+              t,
+              label: t('quotaAuto'),
+              hint: t('quotaAutoHint'),
+              note: compact ? undefined : t('quotaAutoNote'),
+              usedPercent: auto.usedPercent,
+            }),
+        api === undefined
+          ? null
+          : h(QuotaRow, {
+              key: 'api',
+              t,
+              label: t('quotaApi'),
+              note: compact ? undefined : t('quotaApiNote'),
+              usedPercent: api.usedPercent,
+            }),
+        onDemand === undefined
+          ? null
+          : h(
               'div',
-              { className: 'dsh-cursor-usage-label' },
-              h('span', null, windowLabel(t, window.key)),
+              { className: 'dsh-cursor-usage-row', role: 'listitem' },
               h(
-                'span',
-                { title: t('usedPercent', { percent: Math.round(window.usedPercent) }) },
-                `${Math.round(window.usedPercent)}%`,
-                window.resetsAt === undefined
-                  ? ''
-                  : ` · ${t('resetsIn', { duration: formatDuration(window.resetsAt - Date.now()) })}`,
+                'div',
+                { className: 'dsh-cursor-usage-label' },
+                h('span', null, t('onDemandTitle')),
+                h('span', null, t('onDemandAmount', { used: money(onDemand.used), limit: money(onDemand.limit) })),
               ),
+              h(QuotaBar, { label: t('onDemandTitle'), usedPercent: onDemandPercent }),
+              compact ? null : h('div', { className: 'dsh-cursor-usage-note' }, t('onDemandNote')),
             ),
-            h(
-              'div',
-              {
-                className: 'dsh-cursor-bar',
-                role: 'progressbar',
-                'aria-valuemin': 0,
-                'aria-valuemax': 100,
-                'aria-valuenow': Math.round(window.usedPercent),
-                'aria-label': windowLabel(t, window.key),
-              },
-              h('span', { style: { width: `${Math.max(0, Math.min(100, window.usedPercent))}%`, background: barColor(window.usedPercent) } }),
-            ),
-          ),
-        ),
         usage.stale === true ? h('div', { className: 'dsh-cursor-muted' }, t('stale')) : null,
         usage.note !== undefined && !compact ? h('div', { className: 'dsh-cursor-muted' }, usage.note) : null,
       )
@@ -769,7 +828,9 @@ window.__ModuleLoader__.load({
                 'div',
                 { className: 'dsh-cursor-muted' },
                 auth.email !== undefined ? t('signedInAs', { email: auth.email }) : t('signedIn'),
-                auth.expiresAt !== undefined ? ` · ${t('keyExpires', { date: formatDate(auth.expiresAt) })}` : '',
+                auth.expiresAt === undefined || formatDate(auth.expiresAt) === undefined
+                  ? ''
+                  : ` · ${t('keyExpires', { date: formatDate(auth.expiresAt) })}`,
               )
             : h('div', { className: 'dsh-cursor-muted' }, auth.expired === true ? t('keyExpired') : t('signedOut')),
           login.state === 'pending'
@@ -836,7 +897,35 @@ window.__ModuleLoader__.load({
             h('span', { className: 'dsh-cursor-grow' }),
             h('button', { className: 'dsh-cursor-btn', disabled: busy !== '', onClick: () => doRefreshUsage(false) }, busy === 'usage' ? t('refreshing') : t('refresh')),
           ),
-          h('div', { className: 'dsh-cursor-muted' }, t('usageIntro')),
+          usage?.plan === undefined
+            ? null
+            : h(
+                'div',
+                { className: 'dsh-cursor-plan' },
+                h('span', { className: 'dsh-cursor-plan-label' }, t('currentPlan')),
+                h(
+                  'span',
+                  null,
+                  h('span', { className: 'dsh-cursor-plan-name' }, usage.plan.name),
+                  usage.plan.price === undefined ? null : h('span', { className: 'dsh-cursor-muted' }, ` ${usage.plan.price}`),
+                ),
+              ),
+          usage?.resetsAt === undefined || formatDate(usage.resetsAt) === undefined
+            ? null
+            : h(
+                'div',
+                { className: 'dsh-cursor-muted' },
+                daysLeft(usage.resetsAt) === 0
+                  ? t('planResetToday')
+                  : t('planReset', { date: formatDate(usage.resetsAt), days: daysLeft(usage.resetsAt) }),
+              ),
+          usage?.supported === true
+            ? h(
+                'div',
+                { className: 'dsh-cursor-section-label' },
+                usage.plan === undefined ? t('includedUsage') : t('includedIn', { plan: usage.plan.name }),
+              )
+            : null,
           h(UsageBars, { usage, t }),
           usage !== null && usage.supported !== true
             ? h(

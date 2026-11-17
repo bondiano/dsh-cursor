@@ -7,6 +7,8 @@ import {
   authFileCandidates,
   fetchUsage,
   jwtExpiry,
+  onDemandUsage,
+  parsePlan,
   parseUsage,
   resolveCliToken,
   UsageCache,
@@ -79,6 +81,23 @@ test('parseUsage reports missing or malformed usage without inventing zero', () 
   assert.equal(parseUsage({ planUsage: { totalPercentUsed: -1 } }).supported, false)
 })
 
+test('parseUsage reads the monthly on-demand limit in dollars', () => {
+  const parsed = parseUsage({
+    planUsage: { autoPercentUsed: 4, apiPercentUsed: 28 },
+    spendLimitUsage: { individualLimit: 200, individualRemaining: 150, limitType: 'user' },
+  })
+  assert.deepEqual(parsed.onDemand, { limit: 2, used: 0.5 })
+  assert.equal(parseUsage({ planUsage: { autoPercentUsed: 4 }, spendLimitUsage: { individualLimit: 0 } }).onDemand, undefined)
+  assert.equal(onDemandUsage(undefined), undefined)
+})
+
+test('parsePlan reads the plan name and price', () => {
+  assert.deepEqual(parsePlan({ planInfo: { planName: ' Ultra ', price: '$200/mo' } }), { name: 'Ultra', price: '$200/mo' })
+  assert.deepEqual(parsePlan({ planInfo: { planName: 'Pro' } }), { name: 'Pro' })
+  assert.equal(parsePlan({}), undefined)
+  assert.equal(parsePlan({ planInfo: { planName: '' } }), undefined)
+})
+
 test('fetchUsage sends the Connect request and rejects auth failures', async () => {
   let seen
   const payload = { planUsage: { totalPercentUsed: 1, autoPercentUsed: 2, apiPercentUsed: 3 } }
@@ -119,9 +138,12 @@ test('UsageCache caches, forces, and degrades to a stale snapshot', async () => 
         billingCycleEnd: 5000,
       }
     },
+    fetchPlan: async () => ({ planInfo: { planName: 'Ultra', price: '$200/mo' } }),
   })
   const first = await cache.get()
   assert.equal(first.supported, true)
+  assert.deepEqual(first.plan, { name: 'Ultra', price: '$200/mo' })
+  assert.equal(first.resetsAt, 5_000_000)
   assert.equal(fetches, 1)
   now = 1_500
   await cache.get()

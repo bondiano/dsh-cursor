@@ -216,3 +216,45 @@ test('transport blocks an unexpected native tool channel', async () => {
   )
   await transport.close()
 })
+
+test('transport drops a continuation from another model and disposes its agent', async () => {
+  const { transport, calls } = makeTransport({
+    makeRun: ({ options }) => ({
+      status: 'running',
+      supports: () => true,
+      async *stream() {
+        yield { type: 'assistant', message: { content: [{ type: 'text', text: 'Checking' }] } }
+        await options.local.customTools.read.execute({ path: 'a' }, { toolCallId: 'sdk-1' })
+      },
+      async wait() {
+        return { status: 'finished' }
+      },
+      async cancel() {
+        calls.cancelled += 1
+      },
+    }),
+  })
+  const tools = [{ name: 'read', description: 'Read', parameters: {} }]
+  const events = await collect(transport.stream({ ...request, tools }))
+  const token = events.find(event => event.type === 'continuation')?.token
+  assert.equal(typeof token, 'string')
+  const history = [
+    ...request.messages,
+    { role: 'assistant', content: [{ type: 'tool-call', id: 'call-1', name: 'read', arguments: '{"path":"a"}' }] },
+    { role: 'tool', toolCallId: 'call-1', content: [{ type: 'text', text: 'ok' }] },
+  ]
+  const next = { ...request, tools, messages: history, continuation: token, model: { id: 'claude-opus-5-5', params: [] } }
+  await assert.rejects(
+    () => collect(transport.stream(next)),
+    error => error.code === 'CONTINUATION_UNAVAILABLE',
+  )
+  await assert.rejects(
+    () => collect(transport.stream(next)),
+    error => error.code === 'CONTINUATION_UNAVAILABLE',
+  )
+  for (let attempt = 0; attempt < 100 && calls.disposed === 0; attempt += 1) {
+    await new Promise(resolve => setTimeout(resolve, 5))
+  }
+  assert.equal(calls.disposed, 1)
+  await transport.close()
+})

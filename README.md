@@ -5,7 +5,7 @@ Cursor models in DeepSeek Harness.
 - **Settings → Cursor**: browser sign-in, account status, subscription quota windows, and a model editor.
 - **Composer picker**: selected Cursor models stream through the official `@cursor/sdk` agent runtime.
 - **DSH-owned tools**: Cursor's built-in file/shell tools are disabled; every model tool call returns to DSH for approval, execution, and logging.
-- **Composer usage pill**: Total/Auto/API quota for the current Cursor model when a local Cursor CLI session is available.
+- **Composer usage pill**: Cursor Models and Other Models usage for the current Cursor model when a local Cursor CLI session is available.
 
 The full user-facing description and limitations are in [docs/DETAIL.md](docs/DETAIL.md).
 
@@ -30,7 +30,9 @@ An existing Cursor API key can be saved manually in the same card. `CURSOR_API_K
 
 ## Quotas
 
-Quota telemetry is read from a local Cursor CLI session (`CURSOR_AUTH_TOKEN`, the CLI auth file, or — only on explicit request — the macOS Keychain) through Cursor's `GetCurrentPeriodUsage` Connect endpoint. It is independent of model calls: without a CLI login, models still work and the card explains how to connect quota data.
+Quota telemetry is read from a local Cursor CLI session (`CURSOR_AUTH_TOKEN`, the CLI auth file, or — only on explicit request — the macOS Keychain) through two Cursor Connect endpoints: `GetCurrentPeriodUsage` for the quota buckets and `GetPlanInfo` for the plan name and price. It is independent of model calls: without a CLI login, models still work and the card explains how to connect quota data.
+
+The card mirrors Cursor's own **Plan & usage** page: current plan, reset date, the **Cursor Models** bucket (`autoPercentUsed`, Cursor Grok and Composer), the **Other Models** bucket (`apiPercentUsed`), and the monthly **On-Demand** limit from `spendLimitUsage`. Included usage overall (`totalPercentUsed`) drives the composer pill.
 
 ## Development
 

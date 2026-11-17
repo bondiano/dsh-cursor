@@ -154,6 +154,34 @@ test('adapter forwards a continuation and omits the prompt', async () => {
   assert.equal(calls[0].prompt, undefined)
 })
 
+test('adapter replays the conversation when a continuation is unusable', async () => {
+  const { adapter, calls } = makeAdapter({
+    stream: async function* (request) {
+      if (request.continuation !== undefined) {
+        throw new ProviderError('CONTINUATION_UNAVAILABLE', 'Native tool continuation expired or no longer matches this request')
+      }
+      yield { type: 'text', text: 'Done' }
+    },
+  })
+  const messages = [
+    { role: 'user', content: [{ type: 'text', text: 'Hello' }] },
+    {
+      role: 'assistant',
+      content: [{ type: 'tool-call', id: 'call-1', name: 'read', arguments: '{}' }],
+      source: { kind: 'model', provider: 'cursor', model: 'grok-4.7', replayState: { response: { protocol: 'cursor-sdk-v1', continuation: 'token-1' } } },
+    },
+    { role: 'tool', toolCallId: 'call-1', content: [{ type: 'text', text: 'ok' }] },
+  ]
+  const chunks = await collect(adapter.stream({ ...baseOptions, messages }))
+  const finish = chunks.at(-1)
+  assert.equal(finish.reason.kind, 'stop')
+  assert.equal(finish.replayState.response.continuation, undefined)
+  assert.deepEqual(finish.replayState.response.attempts, [{ upstream: { continuation: 'unavailable', fallback: 'fresh-conversation' } }])
+  assert.equal(calls.length, 2)
+  assert.equal(calls[1].continuation, undefined)
+  assert.match(calls[1].prompt, /tool-call/)
+})
+
 test('adapter rejects unsupported controls before transport', async () => {
   const { adapter, calls } = makeAdapter({
     stream: async function* () {
