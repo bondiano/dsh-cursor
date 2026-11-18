@@ -1,0 +1,49 @@
+direction: down
+
+dsh_user: "DSH user\ndesktop app"
+
+mf_settings_card: "Cursor settings card\n[settings.section slot]"
+
+mf_usage_pill: "Composer usage pill\n[composer.dock slot]"
+
+rpc_gateway: "/api/cursor-provider\n[connection fetch routes]"
+
+cursor_host: "cursor-provider host\n[Cordis, Node.js]"
+
+llm_service: "dsh-llm service\n[cursor route]"
+
+cursor_transport: "CursorTransport\n[sdk agent runs]"
+
+cursor_auth: "CursorAuth\n[browser sign-in]"
+
+db_credentials: "credential record\ndsh-cursor/default"
+
+catalog_cache: "CatalogCache\n[models list]"
+
+usage_cache: "UsageCache\n[plan and usage]"
+
+db_settings: "cursor settings.json\n[~/.dsh/plugins]"
+
+db_cursor_cli_auth: "~/.cursor/auth.json\n[CLI token, Keychain]"
+
+ex_cursor_agents: "Cursor agent cloud\n[@cursor/sdk]"
+
+ex_cursor_dashboard: "api2.cursor.sh\n[DashboardService]"
+
+dsh_user -> mf_settings_card: "signs in, edits\nmodel catalog"
+dsh_user -> mf_usage_pill: "reads quota pill"
+mf_settings_card -> rpc_gateway: "rpc.call over\n/api channel"
+mf_usage_pill -> rpc_gateway: "usage method\nrpc call"
+rpc_gateway -> cursor_host: "dispatches handler\nmethods"
+cursor_host -> llm_service: "registerAdapter cursor\nand model discovery"
+llm_service -> cursor_transport: "adapter delegates\nchat requests"
+cursor_transport -> cursor_auth: "resolves API key\nper request"
+cursor_auth -> db_credentials: "stores minted key\nread and write record"
+cursor_auth -> ex_cursor_agents: "browser sign-in\nmints user key"
+cursor_transport -> ex_cursor_agents: "prompt runs with\ntmp workdir"
+catalog_cache -> ex_cursor_agents: "sdk models list\nby API key"
+usage_cache -> ex_cursor_dashboard: "GetCurrentPeriodUsage\nGetPlanInfo fetch"
+usage_cache -> db_cursor_cli_auth: "reads CLI token\nenv, file, Keychain"
+cursor_host -> catalog_cache: "builds cache with\nsdk loader"
+cursor_host -> usage_cache: "builds usage cache"
+cursor_host -> db_settings: "SettingsStore writes\n0600 atomic"
