@@ -1,6 +1,6 @@
 {
   "name": "@local/dsh-cursor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "Cursor models in DeepSeek Harness: browser sign-in, DSH-owned tools, model editor, subscription quota windows and a composer usage pill.",
